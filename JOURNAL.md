@@ -196,3 +196,9 @@ TIME: 2h 15m
 - However, it did take me a while to learn that I had to use a much slower bauderate than default, and trying to use the normal one just resulted in no connection to esptool
 
   **TIME: 2h**
+
+- Not much here, but found out that my previous code just completely broke, so next session will be implementing somebody elses USB UART bridge in C, but doing some small edits for things like bootloader mode vs normal
+
+[Repo for the other bridge](https://github.com/GrechTech/rp2040-pio-uart-bridge/tree/main)
+
+**TIME: 30m**
