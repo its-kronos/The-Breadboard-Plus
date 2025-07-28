@@ -197,8 +197,20 @@ TIME: 2h 15m
 
   **TIME: 2h**
 
+# 7/26/25
+
 - Not much here, but found out that my previous code just completely broke, so next session will be implementing somebody elses USB UART bridge in C, but doing some small edits for things like bootloader mode vs normal
 
 [Repo for the other bridge](https://github.com/GrechTech/rp2040-pio-uart-bridge/tree/main)
+
+**TIME: 30m**
+
+# 7/27/25
+
+- Was able to implement the firmware for more efficient forwarding, and it worked at normal baud
+
+  <img width="491" height="255" alt="image" src="https://github.com/user-attachments/assets/f8084cd5-7855-48af-979b-cd0b0a73dad4" />
+
+- This was also pretty easy to implement, and I didn't think that basic IO manipulation (which were the small changes I did to allow for bootloading) would be this simple
 
 **TIME: 30m**
