@@ -1,8 +1,8 @@
 # Assumes that micropython is installed on the WROOM module, which should be for the ESP32-C3
 # To flash after micropython is installed, please use the USB UART bridge given in the firmware folder and use any tool to flash, running at 115200 baud
 
-WIFI_NAME = "nuhuh"
-WIFI_PASSWORD = "nuhuh"
+WIFI_NAME = ""
+WIFI_PASSWORD = ""
 
 
 import network
@@ -10,7 +10,7 @@ from machine import UART as UART_maker
 import time
 import requests
 
-UART = UART_maker(0)
+UART = UART_maker(1)
 UART.init(baudrate=9600, bits=8, tx=21, rx=20)
 
 wifi = network.WLAN()
