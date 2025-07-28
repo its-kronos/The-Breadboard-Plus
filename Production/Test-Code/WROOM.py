@@ -40,6 +40,7 @@ while not BREADBOARD_READY:
         data = UART.read().decode('utf-8').strip()
         if data == "BREADBOARD READY":
             BREADBOARD_READY = True
+    time.sleep(0.01)
 
 UART.write("READY FOR COMMANDS")
 
@@ -59,4 +60,4 @@ while True:
                 error = True
                 err_m = "Failed to fetch quote"
 
-    time.sleep(0.1)
+    time.sleep(0.01)

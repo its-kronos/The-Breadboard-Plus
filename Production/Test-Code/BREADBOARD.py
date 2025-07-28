@@ -35,7 +35,7 @@ while True:
     if button.value:
         uart.write("GET_QUOTE")
         while not uart.in_waiting:
-            pass
+            time.sleep(0.01)
         data = uart.read().decode('utf-8').strip()
         if data.startswith("QUOTE:"):
             quote = data.split("QUOTE:")[1]
