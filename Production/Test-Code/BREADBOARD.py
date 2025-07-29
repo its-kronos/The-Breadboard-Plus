@@ -1,9 +1,8 @@
 # assumes that circuit python is installed on the board, the link for which is given in the readme
-# also assumes that the module for PIO uart is installed, which is given in the readme
 
 import board 
 import digitalio
-import adafruit_pio_uart as pio_uart
+import busio
 import time
 
 BUTTON_PIN = board.GP12
@@ -11,38 +10,56 @@ button = digitalio.DigitalInOut(BUTTON_PIN)
 button.direction = digitalio.Direction.INPUT
 button.pull = digitalio.Pull.DOWN
 
-uart = pio_uart.UART(tx=board.GP2, rx=board.GP1, baudrate=9600)
+EN = digitalio.DigitalInOut(board.GP3)
+EN.direction = digitalio.Direction.OUTPUT
+EN.value = True
+
+uart = busio.UART(tx=board.GP4, rx=board.GP5, baudrate=9600)
 
 WROOM_CONNECTED = False
 
+time.sleep(0.25)
+
+print("connecting")
+uart.reset_input_buffer()
 while not WROOM_CONNECTED:
-    uart.write("BREADBOARD READY")
-
     if uart.in_waiting:
-        data = uart.read().decode('utf-8').strip()
-        if data == "READY FOR COMMANDS":
+        data = uart.readline().decode('utf-8').strip()
+        print(data)
+        if data == "WROOM READY":
             WROOM_CONNECTED = True
+            uart.reset_input_buffer()
+    time.sleep(0.1)
+
+print("CONNECTED")
+
+for x in range(0,3):
+    uart.write("BREADBOARD READY\n")
 
 
+debounce = False
 while True:
 
     if uart.in_waiting:
-        data = uart.read().decode('utf-8').strip()
+        data = uart.readline().decode('utf-8').strip()
         if data.startswith("ERROR:"):
-            print(f"{data}\n")
+            print(f"{data}")
 
-
-    if button.value:
-        uart.write("GET_QUOTE")
+    if button.value and not debounce:
+        debounce = True
+        uart.write("GET_QUOTE\n")
         while not uart.in_waiting:
-            time.sleep(0.01)
-        data = uart.read().decode('utf-8').strip()
+            pass
+        data = uart.readline().decode('utf-8').strip()
         if data.startswith("QUOTE:"):
             quote = data.split("QUOTE:")[1]
             print(f"{quote}\n")
         elif data.startswith("ERROR:"):
             print(f"{data}\n")
+            
+    elif not button.value:
+        debounce = False
 
-    time.sleep(0.1)
+    time.sleep(0.01)
 
 

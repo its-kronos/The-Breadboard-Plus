@@ -11,7 +11,7 @@ import time
 import requests
 
 UART = UART_maker(1)
-UART.init(baudrate=9600, bits=8, tx=21, rx=20)
+UART.init(baudrate=9600, bits=8, tx=9, rx=8)
 
 wifi = network.WLAN()
 wifi.active(True)
@@ -36,28 +36,31 @@ while not wifi.isconnected():
 BREADBOARD_READY = False
 
 while not BREADBOARD_READY:
+    UART.write("WROOM READY\n")
     if UART.any():
-        data = UART.read().decode('utf-8').strip()
+        data = UART.readline().decode('utf-8').strip()
         if data == "BREADBOARD READY":
             BREADBOARD_READY = True
-    time.sleep(0.01)
+    time.sleep(0.1)
 
-UART.write("READY FOR COMMANDS")
+time.sleep(0.1)
+
+UART.read()
 
 while True:
     if error:
-        UART.write(f"ERROR:{err_m}")
+        UART.write(f"ERROR:{err_m}\n")
         break
 
     if UART.any():
-        data = UART.read().decode('utf-8').strip()
+        data = UART.readline().decode('utf-8').strip()
         if data=="GET_QUOTE":
             res = requests.get("https://zenquotes.io/api/random")
             if res.status_code == 200:
                 quote = res.json()[0]['q'] + " - " + res.json()[0]['a']
-                UART.write(f"QUOTE:{quote}")
+                UART.write(f"QUOTE:{quote}\n")
             else:
                 error = True
                 err_m = "Failed to fetch quote"
 
-    time.sleep(0.01)
+    time.sleep(0.1)
