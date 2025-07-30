@@ -214,3 +214,23 @@ TIME: 2h 15m
 - This was also pretty easy to implement, and I didn't think that basic IO manipulation (which were the small changes I did to allow for bootloading) would be this simple
 
 **TIME: 30m**
+
+# 7/28/25
+
+- Created a draft test code that communicated between MCUs using UART, and when a button is pressed, the WROOM sends an API request to get a wholesome quote
+
+
+- At first, this didn't really work, and I spent around 7 hours trying to debug it, wondering why the WROOM wasn't even doing anything after I flash circuitpython to replace the bridge on the RP2040
+- I had posted asking for help on slack and on reddit, as well as asking a lot on various AI assistants, to no avail
+
+<img width="301" height="187" alt="image" src="https://github.com/user-attachments/assets/1738bd1f-8690-4075-80a7-f922d5a8e9cc" />
+
+<img width="959" height="152" alt="image" src="https://github.com/user-attachments/assets/9066d6b0-2c8f-474c-b121-9608eabfd594" />
+
+- Turns out, all I had to do was change the EN pin on the WROOM (GPIO 3 on the board) to be on instead of floating, which was a REALLY easy fix that only took 15 minutes, and after that, it worked perfectly
+
+<img width="739" height="242" alt="image" src="https://github.com/user-attachments/assets/d39ffd42-a0a8-4942-9534-969981eb30c6" />
+
+- All that's left is to edit a bit on the circuitpython custom board config pin names to make an easier user experience, but that shouldn't take that long and be at most 30 minutes to change and push/test
+
+**TIME: 7h**
