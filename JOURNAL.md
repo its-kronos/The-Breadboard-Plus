@@ -5,7 +5,9 @@
 - Author: An. D. (its_kronos)
 - Description: Breadboard, but microcontroller (AKA custom devboard) *probably change later*
 - Creation Date: 6/24/2025
-- Total Time (before building): 13h 
+- Total Time (before building): 13h
+- Time building: 17.75h
+- Time: 30.75h
 
 # 6/24/2025
 
@@ -234,3 +236,16 @@ TIME: 2h 15m
 - All that's left is to edit a bit on the circuitpython custom board config pin names to make an easier user experience, but that shouldn't take that long and be at most 30 minutes to change and push/test
 
 **TIME: 7h**
+
+# 8/7/25
+
+- A bit of procrastinating later (was working on another devboard):
+
+
+- So, I forgot to include the uncompiled version of the USB UART bridge, and since I didn't have the raw code for that, I recoded them
+
+- Finished up the custom circuitpython board config and created a [demo](https://youtube.com/shorts/6yIjaiG749g?feature=share) to showcase it!
+
+**time: 1.5h**
+
+
