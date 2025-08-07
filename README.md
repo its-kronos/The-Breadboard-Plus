@@ -4,6 +4,10 @@
 
 ![PCB_BACK](https://github.com/user-attachments/assets/6c6d4610-c3ea-4d7f-a9e6-3198758aaf28)
 
+<img width="3000" height="4000" alt="Adobe Express - file (1)" src="https://github.com/user-attachments/assets/c257884d-8349-4daf-8d14-e619e1e1ce54" />
+
+<img width="433" height="577" alt="20250730_171424-removebg-preview" src="https://github.com/user-attachments/assets/de9f793a-691e-497e-8d1b-aa8430076bc8" />
+
 
 # What is it?
 - The Breadboard+ is a custom RP2040 devboard in the ***shape of bread*** and fun decorations on both the front and back, making it slightly bigger than others in return for a much nicer look.
@@ -14,6 +18,25 @@
 - After previously designing a keyboard PCB with a bare RP2040 chip, I decided that creating a custom devboard would be a good way for me to practice reading documentation and extend upon the skills developed during that previous project.
 
 ![image](https://github.com/user-attachments/assets/1a4461b9-ab84-4c5d-8580-057af9d8251b)
+
+# Demo
+
+[demo](https://youtube.com/shorts/6yIjaiG749g?feature=share)
+
+# Instructions & Credits
+
+- To be able to flash the ESP32-C3 on the board, you must use the code given in the firmware production folder. Raw code is given in this folder as well, and in order to build it, you would have to clone [this repo for a PIO USB UART bridge](https://github.com/GrechTech/rp2040-pio-uart-bridge) by GrechTech and replace the uart-bridge.c file with the code version you want, bootloader for installing something like micropython, and the normal version for using thonny with micropython.
+
+- If you are planning to implement UART with the WROOM, please use pins 8 and 9, as those are what work the best
+
+- To use circuitpython on the RP2040 chip, please use the custom board build inside the firmware folder. You can build it yourself from [my circuitpython fork](https://github.com/its-kronos/circuitpython), and eventually (once it gets approved), from [Adafruit](https://adafruit-circuit-python.s3.amazonaws.com/index.html?prefix=bin/) and maybe even the offical circuitpython website one day
+
+
+### Pin naming conventions: 
+  - WIFI/WROOM/GP3 (turn value to high to use WIFI)
+  - WROOM_TX (goes to WROOM's GPIO 8/RX)
+  - WROOM_RX (goes to WROOM's GPIO 9/TX)
+  - All other GPIO pins on the board work as normal/labelled
 
 # Surprises
 - When I first started routing the PCB, I didn't realize how thick the traces would need to be to insure a 90 ohm impedence on the USB data lines, which is called for by USB standards. This posed quite a difficulty because the design rules checker (DRC) kept on warning that the clearence between traces was too small, and it took me a good amount of time to learn how to assign different rules for different netlists (AKA connected parts).
