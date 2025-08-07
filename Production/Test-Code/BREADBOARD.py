@@ -10,11 +10,11 @@ button = digitalio.DigitalInOut(BUTTON_PIN)
 button.direction = digitalio.Direction.INPUT
 button.pull = digitalio.Pull.DOWN
 
-EN = digitalio.DigitalInOut(board.GP3)
+EN = digitalio.DigitalInOut(board.WIFI)
 EN.direction = digitalio.Direction.OUTPUT
 EN.value = True
 
-uart = busio.UART(tx=board.GP4, rx=board.GP5, baudrate=9600)
+uart = busio.UART(tx=board.WROOM_TX, rx=board.WROOM_RX, baudrate=9600)
 
 WROOM_CONNECTED = False
 
@@ -61,5 +61,7 @@ while True:
         debounce = False
 
     time.sleep(0.01)
+
+
 
 
